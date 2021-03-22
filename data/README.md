@@ -86,7 +86,7 @@ We see that for each Experiment we have 4 different Datasets. They can be access
 * tactile_data_raw - Collected uSkin tactile data. Each of the **18** sensitive pins of sensor returns **3** signals (Normal and Shear Forces). For experiment 1 a total of **4138** samples have been collected.
 * tactile_timestamps - Timestamps (in ms) for each of the tactile samples.
 * tactile_timestamps - Manually annotated slip labels for each of the tactile samples.
-* tactile_changes_label - For convenience, we have also included a label array indicating if there was a siginificant diference in the tactile imprint regarding the previous timestamp.
+* tactile_changes_label - For convenience, we have also included a label array indicating if there was a significant overall diference in the tactile imprint magnitude readings regarding the previous timestamp.
 
 ```python
 In [1]: hf['GGCNN2/SpoolSolder/Pose1/Exp1/tactile_changes_label']                                                                                                                                                                     
@@ -108,4 +108,83 @@ Using ```numpy``` python package, each dataset is easily imported.
 import numpy as np
 
 data = np.array(hf['GGCNN2/SpoolSolder/Pose1/Exp1/tactile_data_raw'])
+data.shape
+
+Out[5]: (18, 3, 4138)
 ```
+
+The uSkin tactile data is organized as follows:
+
+* ```data[:,0,:]```: Measurements along the X-axis (shear force) for each pin and for each timestamp.
+* ```data[:,1,:]```: Measurements along the Y-axis (shear force) for each pin and for each timestamp.
+* ```data[:,2,:]```: Measurements along the Z-axis (Normal force) for each pin and for each timestamp.
+
+Each individual pin of the sensor is accessed as follows:
+
+![alt text][uskin_cans]
+![alt text][uskin]
+
+* ```data[0,:,:]```: 3-axis measurements for a single pin (C1-SDA1)
+* ```data[1,:,:]```: 3-axis measurements for a single pin (C1-SDA2)
+* ```data[2,:,:]```: ... (C1-SDA3)
+* ```data[3,:,:]```: ... (C2-SDA1)
+* ```data[4,:,:]```: ... (C2-SDA2)
+* ```data[5,:,:]```: ... (C2-SDA3)
+* ```data[6,:,:]```: ... (C3-SDA1)
+* ```data[7,:,:]```: ... (C3-SDA2)
+* ```data[8,:,:]```: ... (C3-SDA3)
+* ```data[9,:,:]```: ... (C4-SDA1)
+* ```data[10,:,:]```: ... (C4-SDA2)
+* ```data[11,:,:]```: ... (C4-SDA3)
+* ```data[12,:,:]```: ... (C5-SDA1)
+* ```data[13,:,:]```: ... (C5-SDA2)
+* ```data[14,:,:]```: ... (C5-SDA3)
+* ```data[15,:,:]```: ... (C6-SDA1)
+* ```data[16,:,:]```: ... (C6-SDA2)
+* ```data[17,:,:]```: ... (C6-SDA3)
+
+
+Finally, to load the labeling dataset:
+```python
+labels = np.array(hf['GGCNN2/SpoolSolder/Pose1/Exp1/tactile_slips_label'])
+labels.shape
+
+Out[6]: (4138,)
+```
+
+Inspecting the dataset in detail we see that each sample is labeled with one of 6 possible tags:
+
+```python
+# Some code to compute statistics on the labels
+y = np.bincount(labels) 
+tag = np.nonzero(y)[0] 
+
+for a, b in zip(tag,y[tag]): 
+    print("Label {} appears {} times ({:.2f}%)".format(a, b, b/labels.shape[0]))
+
+Out[7]: 
+Label 0 appears 1818 times (0.44%)
+Label 1 appears 475 times (0.11%)
+Label 2 appears 16 times (0.00%)
+Label 3 appears 42 times (0.01%)
+Label 4 appears 1626 times (0.39%)
+Label 5 appears 34 times (0.01%)
+Label 6 appears 127 times (0.03%)
+```
+
+Each tag corresponds to a specfic event during the object manipulation:
+
+* ```0:``` Object is not being held/Object is being held and robot arm is static. Slip is NOT percieved;
+* ```1:``` Object is being held, robot arm is static. SLIP is perceived;
+* ```2:``` Object is RELEASED by robotic gripper;
+* ```3:``` Object is GRASPED by robotic gripper;
+* ```4:``` Object is being held while robotic arm is executing some motion. Slip is NOT percieved;
+* ```5:``` Object is being held while robotic arm is executing some motion. SLIP is percieved;
+* ```6:``` Other tactile events (ignore this for now).
+
+Tactile slip events are tagged as either ```1``` or ```5```. As you can see, data is unbalanced on the number of slip events vs. no-slip events.
+
+[uskin_cans]: https://github.com/ARQ-CRISP/slip_detection_dataset_2021/tree/main/images/uskin_cans.png "uskin_pins_canID.png"
+[uskin]: https://github.com/ARQ-CRISP/slip_detection_dataset_2021/tree/main/images/sensor.jpg "sensor.png"
+<!-- [uskin_cans]: ../images/uskin_cans.png "uskin_pins_canID.png"
+[uskin]: ../images/sensor.jpg "sensor.png" -->
