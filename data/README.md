@@ -121,8 +121,8 @@ The uSkin tactile data is organized as follows:
 
 Each individual pin of the sensor is accessed as follows:
 
-![alt text][uskin_cans]
-![alt text][uskin]
+![uskin_cans]
+![uskin]
 
 * ```data[0,:,:]```: 3-axis measurements for a single pin (C1-SDA1)
 * ```data[1,:,:]```: 3-axis measurements for a single pin (C1-SDA2)
@@ -184,7 +184,7 @@ Each tag corresponds to a specfic event during the object manipulation:
 
 Tactile slip events are tagged as either ```1``` or ```5```. As you can see, data is unbalanced on the number of slip events vs. no-slip events.
 
-[uskin_cans]: https://github.com/ARQ-CRISP/slip_detection_dataset_2021/tree/main/images/uskin_cans.png "uskin_pins_canID.png"
-[uskin]: https://github.com/ARQ-CRISP/slip_detection_dataset_2021/tree/main/images/sensor.jpg "sensor.png"
+[uskin_cans]: https://github.com/ARQ-CRISP/slip_detection_dataset_2021/blob/main/images/uskin_cans.png "uskin_pins_canID.png"
+[uskin]: https://github.com/ARQ-CRISP/slip_detection_dataset_2021/blob/main/images/sensor.jpg "sensor.png"
 <!-- [uskin_cans]: ../images/uskin_cans.png "uskin_pins_canID.png"
 [uskin]: ../images/sensor.jpg "sensor.png" -->
