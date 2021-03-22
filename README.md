@@ -23,5 +23,5 @@ Each object was placed in three different poses in a 50x50cm workspace, and for 
 Each of these experiments can be extracted independently from the HDF5 files provided for each object.
 
 
-[uskin_vis]: https://github.com/ARQ-CRISP/slip_detection_dataset_2021/tree/main/images/sensor_vis.png "sensor_vis.png"
+[uskin_vis]: https://github.com/ARQ-CRISP/slip_detection_dataset_2021/blob/main/images/sensor_vis.png "sensor_vis.png"
 <!-- [uskin_vis]: images/sensor_vis.png "sensor_vis.png" -->
