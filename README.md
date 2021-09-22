@@ -1,5 +1,5 @@
 # slip_detection_dataset_2021
-Tactile data collected in the wild, during autonomous robotic pick-and-place tasks. See video bellow for a short description of experimental and data collection procedure.
+Tactile data collected in the wild, during autonomous robotic pick-and-place tasks [[1]](#1). See video bellow for a short description of experimental and data collection procedure.
 
 <a href="https://www.youtube.com/watch?v=rdjgSdl7oQU" target="_blank"><img src="http://img.youtube.com/vi/rdjgSdl7oQU/0.jpg" 
 alt="Tactile Slip Detection in the Wild Leveraging Distributed Sensing of Both Normal and Shear Forces" width="240" height="180" border="10" /></a>
@@ -25,3 +25,10 @@ Each of these experiments can be extracted independently from the HDF5 files pro
 
 [uskin_vis]: https://github.com/ARQ-CRISP/slip_detection_dataset_2021/blob/main/images/sensor_vis.png "sensor_vis.png"
 <!-- [uskin_vis]: images/sensor_vis.png "sensor_vis.png" -->
+
+## References
+
+<a id="1">[1]</a> 
+Zenha, R., Denoun, B., Coppola, C., & Jamone, L., (2021)
+Tactile Slip Detection in the Wild Leveraging Distributed Sensing of both Normal and Shear Forces
+International Conference on Intelligent Robots and Systems (IROS)
