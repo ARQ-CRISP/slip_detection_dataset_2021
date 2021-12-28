@@ -31,4 +31,6 @@ Each of these experiments can be extracted independently from the HDF5 files pro
 <a id="1">[1]</a> 
 Zenha, R., Denoun, B., Coppola, C., & Jamone, L., (2021)
 Tactile Slip Detection in the Wild Leveraging Distributed Sensing of both Normal and Shear Forces
-International Conference on Intelligent Robots and Systems (IROS)
+IEEE International Conference on Intelligent Robots and Systems (IROS)
+https://ieeexplore.ieee.org/document/9636602
+DOI: 10.1109/IROS51168.2021.9636602
